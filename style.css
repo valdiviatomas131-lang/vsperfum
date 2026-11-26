@@ -12,8 +12,24 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 30px; }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.55 var(--sans); -webkit-font-smoothing: antialiased; transition: background-color .28s ease, color .28s ease; }
+html { scroll-behavior: smooth; scroll-padding-top: 30px; background: var(--paper); }
+body { position: relative; isolation: isolate; margin: 0; background: transparent; color: var(--ink); font: 15px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+.chroma-background { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--paper); pointer-events: none; transition: background-color .28s ease; }
+.chroma-background::before, .chroma-background::after { position: absolute; inset: -18%; content: ""; will-change: transform; }
+.chroma-background::before {
+  background:
+    radial-gradient(ellipse 42% 30% at 18% 28%, rgba(101, 87, 172, .13), transparent 76%),
+    radial-gradient(ellipse 38% 28% at 82% 38%, rgba(52, 118, 177, .11), transparent 78%),
+    radial-gradient(ellipse 45% 34% at 55% 86%, rgba(145, 105, 177, .09), transparent 76%);
+  animation: chroma-drift 34s ease-in-out infinite alternate;
+}
+.chroma-background::after {
+  background:
+    linear-gradient(118deg, transparent 27%, rgba(101, 87, 172, .045) 43%, transparent 58%),
+    linear-gradient(64deg, transparent 48%, rgba(52, 118, 177, .04) 62%, transparent 80%),
+    radial-gradient(ellipse 36% 22% at 72% 76%, rgba(133, 111, 190, .07), transparent 78%);
+  animation: chroma-drift 43s ease-in-out -16s infinite alternate-reverse;
+}
 button, input, select, textarea { font: inherit; }
 button, a, select { -webkit-tap-highlight-color: transparent; }
 button { color: inherit; }
@@ -26,7 +42,7 @@ a { color: inherit; }
 .connection-error { padding: 12px 20px; border-bottom: 1px solid #d5b19c; background: #f2e4d8; color: #603a2d; text-align: center; font-size: 12px; }
 .connection-error a { color: #603a2d; font-weight: 600; }
 .announcement span { padding: 0 8px; color: #bcb4e1; }
-.site-header { position: relative; z-index: 3; min-height: 82px; padding: 0 max(5vw, calc((100vw - 1300px) / 2)); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 25px; border-bottom: 1px solid var(--line); background: var(--paper); }
+.site-header { position: relative; z-index: 3; min-height: 82px; padding: 0 max(5vw, calc((100vw - 1300px) / 2)); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 25px; border-bottom: 1px solid var(--line); background: transparent; }
 .brand { display: flex; align-items: center; gap: 11px; width: fit-content; text-decoration: none; }
 .brand-mark, .brand-avatar { width: 37px; height: 37px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--accent); color: var(--accent); font: 14px var(--serif); object-fit: cover; }
 .brand strong { display: block; font: 19px/1.15 var(--serif); letter-spacing: -.025em; }
@@ -306,6 +322,7 @@ fieldset legend { margin-bottom: 6px; color: var(--muted); font-size: 10px; }
 .js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .68s cubic-bezier(.2,.7,.25,1) var(--reveal-delay, 0ms), transform .68s cubic-bezier(.2,.7,.25,1) var(--reveal-delay, 0ms); }
 .js [data-reveal].is-revealed { opacity: 1; transform: translateY(0); }
 .trust-item[data-reveal] { transition-delay: var(--reveal-delay, 0ms); }
+@keyframes chroma-drift { from { transform: translate3d(-2%, -1%, 0) scale(1.02); } to { transform: translate3d(2%, 1.5%, 0) scale(1.08); } }
 
 @media (min-width: 1500px) { main { padding-right: 70px; padding-left: 70px; } }
 @media (max-width: 1000px) {
@@ -426,4 +443,5 @@ fieldset legend { margin-bottom: 6px; color: var(--muted); font-size: 10px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .chroma-background::before, .chroma-background::after { animation: none; transform: none; }
 }
