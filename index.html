@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3eb">
+  <meta name="description" content="Perfumería de autor. Tubitos árabes, extractos y body splash, con venta minorista y mayorista.">
+  <title>bonav perfum — perfumería de autor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="announcement">Fragancias elegidas con intención <span>·</span> Envíos a todo el país</div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="bonav perfum, inicio">
+      <img id="brand-avatar" class="brand-avatar" alt="" hidden>
+      <span class="brand-mark" aria-hidden="true">BP</span>
+      <span><strong id="brand-name">bonav perfum</strong><small>PERFUMERÍA DE AUTOR</small></span>
+    </a>
+    <nav class="mode-switch" aria-label="Modalidad de compra">
+      <button class="mode-tab is-active" data-mode="retail" aria-pressed="true">Minorista</button>
+      <button class="mode-tab" data-mode="wholesale" aria-pressed="false">Mayorista</button>
+    </nav>
+    <div class="header-actions">
+      <label class="header-search">
+        <span class="sr-only">Buscar fragancias</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+        <input id="quick-search" type="search" placeholder="Buscar" autocomplete="off">
+      </label>
+      <button id="settings-open" class="icon-button" aria-label="Configuración y administración" title="Configuración">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.6 2.8-.2-.1a1.8 1.8 0 0 0-1.9.2l-.2.1h-3.2l-.1-.2a1.8 1.8 0 0 0-1.6-1.1 1.8 1.8 0 0 0-1.6 1.1l-.1.2H6.1l-.1-.2a1.8 1.8 0 0 0-1.7-1.1h-.2l-1.6-2.8.2-.2A1.8 1.8 0 0 0 3 14.1v-3.2l-.2-.1a1.8 1.8 0 0 0-1.1-1.6l-.2-.1V6.2l.2-.1a1.8 1.8 0 0 0 1.1-1.7v-.2l2.8-1.6.2.2a1.8 1.8 0 0 0 1.9.3l.1-.1h3.2l.1.2a1.8 1.8 0 0 0 1.6 1.1 1.8 1.8 0 0 0 1.6-1.1l.1-.2h3.2l.1.2a1.8 1.8 0 0 0 1.7 1.1h.2l1.6 2.8-.2.2a1.8 1.8 0 0 0-.3 1.9l.1.1v3.2l-.2.1a1.8 1.8 0 0 0-1.1 1.6"></path></svg>
+      </button>
+      <button id="cart-open" class="cart-button"><span>Bolsa</span><span id="cart-count" class="cart-count">0</span></button>
+    </div>
+  </header>
+  <div id="connection-error" class="connection-error" role="alert" hidden>
+    No se pudo conectar con el catálogo. No abras esta página con doble clic: inicia el servidor Node.js y configura Supabase; consulta los pasos en <a href="README.md">README.md</a>.
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> PERFUMERÍA PARA TODOS LOS DÍAS</p>
+        <h1>Un aroma.<br><em>Una forma de estar.</em></h1>
+        <p class="hero-description">Tubitos árabes, extractos y brumas elegidos para acompañar tu manera de sentir.</p>
+        <div class="hero-actions">
+          <button class="button button-dark" data-scroll-catalog>Descubrir fragancias <span aria-hidden="true">↗</span></button>
+          <button class="text-link" data-mode="wholesale">¿Tenés un negocio? <span>Venta mayorista →</span></button>
+        </div>
+        <div class="hero-note"><span class="note-seal">CA</span><span>Pequeños rituales,<br>aromas que se quedan.</span></div>
+      </div>
+      <div class="hero-still-life" aria-label="Composición ilustrada de perfumería">
+        <div class="still-life-caption">EL ARTE DE ELEGIR<br><span>UNA FRAGANCIA PROPIA</span></div>
+        <div class="hero-sun"></div>
+        <div class="hero-vase"></div>
+        <div class="hero-bottle"><span class="bottle-cap"></span><span class="bottle-label">CASA<br>ÁMBAR</span></div>
+        <div class="hero-shadow"></div>
+        <span class="still-life-index">N.º 01 — NUESTRA SELECCIÓN</span>
+      </div>
+    </section>
+
+    <section class="category-section" aria-label="Explorar categorías">
+      <div class="section-kicker">ENCONTRÁ TU PRÓXIMO FAVORITO</div>
+      <div id="category-links" class="category-links"></div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+      <div class="catalog-heading">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-line"></span> NUESTRA SELECCIÓN</p>
+          <h2 id="catalog-title">Perfumes para <em>hacerlos tuyos.</em></h2>
+          <p id="catalog-subtitle" class="catalog-subtitle">Aromas con personalidad, a un gesto de distancia.</p>
+        </div>
+        <label class="sort-control">Ordenar
+          <select id="sort-select" aria-label="Ordenar productos">
+            <option value="featured">Recomendados</option><option value="price-asc">Precio: menor a mayor</option><option value="price-desc">Precio: mayor a menor</option><option value="newest">Novedades</option>
+          </select>
+        </label>
+      </div>
+      <div class="catalog-controls">
+        <div id="filter-chips" class="filter-chips" aria-label="Filtrar por categoría"></div>
+        <div class="filter-options">
+          <label class="filter-select"><span class="sr-only">Disponibilidad</span><select id="stock-filter"><option value="all">Todos los productos</option><option value="available">Con stock</option><option value="promos">En promoción</option></select></label>
+          <span id="product-count" class="product-count"></span>
+        </div>
+      </div>
+      <div id="product-grid" class="product-grid" aria-live="polite"></div>
+      <button id="load-more" class="button button-outline load-more" hidden>Ver más fragancias</button>
+    </section>
+
+    <section class="wholesale-banner">
+      <div class="wholesale-copy"><p class="eyebrow">PARA QUIENES EMPRENDEN</p><h2>Tu próximo best seller<br><em>puede empezar acá.</em></h2><p>Precios mayoristas claros, mínimos por producto y una selección que invita a volver.</p><button class="button button-light" data-mode="wholesale">Conocer venta mayorista <span aria-hidden="true">↗</span></button></div>
+      <div class="wholesale-stamp"><span>BUENOS AROMAS<br>BUENOS NEGOCIOS</span><i>CA</i></div>
+    </section>
+
+    <section class="trust-section">
+      <div class="trust-intro"><p class="eyebrow"><span class="eyebrow-line"></span> COMPRAR CON CONFIANZA</p><h2>El gusto está<br>en los detalles.</h2></div>
+      <div class="trust-item"><span class="trust-number">01</span><h3>Selección cuidada</h3><p>Fragancias elegidas por su carácter, calidad y ese algo difícil de explicar.</p></div>
+      <div class="trust-item"><span class="trust-number">02</span><h3>Envíos a todo el país</h3><p>Coordinamos la entrega para que tu pedido llegue seguro y sin sorpresas.</p></div>
+      <div class="trust-item"><span class="trust-number">03</span><h3>Estamos cerca</h3><p>¿Tenés dudas? Te ayudamos a encontrar un aroma que se sienta tuyo.</p></div>
+    </section>
+
+    <section class="contact-strip">
+      <div><p class="eyebrow">¿HABLAMOS DE AROMAS?</p><h2>Estamos del otro lado.</h2></div>
+      <a id="contact-link" class="contact-link" href="#">Escribinos <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="#">Casa Ámbar <span>— perfumería de autor</span></a>
+    <nav aria-label="Información legal"><a href="#politicas">Cambios y envíos</a><a href="#politicas">Privacidad</a><a href="#politicas">Términos</a></nav>
+    <span class="footer-copy">© <span id="year"></span> Casa Ámbar</span>
+    <div id="politicas" class="policy-note">Consultá disponibilidad y tiempos de envío al confirmar tu pedido. Los cambios se coordinan dentro de los 10 días de recibida la compra, con el producto cerrado y en su estado original. Tus datos solo se utilizan para gestionar el pedido y no se comparten con terceros.</div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="product-dialog" class="modal product-modal">
+    <button class="modal-close" data-close="product-dialog" aria-label="Cerrar">×</button>
+    <div id="product-detail"></div>
+  </dialog>
+
+  <dialog id="cart-dialog" class="modal cart-modal">
+    <div class="modal-heading"><div><p class="eyebrow">TU SELECCIÓN</p><h2>La bolsa <em>de aromas.</em></h2></div><button class="modal-close" data-close="cart-dialog" aria-label="Cerrar">×</button></div>
+    <div id="cart-items" class="cart-items"></div>
+    <form id="checkout-form" class="checkout-form">
+      <div class="coupon-row"><label for="coupon-input">Código de descuento</label><div><input id="coupon-input" placeholder="Ej. AROMA10"><button id="apply-coupon" class="text-link" type="button">Aplicar</button></div></div>
+      <p id="coupon-message" class="form-message"></p>
+      <div class="checkout-fields"><label>Nombre<input name="customerName" required maxlength="100" placeholder="Tu nombre"></label><label>Contacto<input name="contact" required maxlength="100" placeholder="WhatsApp o email"></label></div>
+      <fieldset><legend>Entrega</legend><label class="radio-label"><input type="radio" name="delivery" value="Envío a coordinar" checked> Envío a coordinar</label><label class="radio-label"><input type="radio" name="delivery" value="Retiro a coordinar"> Retiro a coordinar</label></fieldset>
+      <fieldset><legend>Pago</legend><label class="radio-label"><input type="radio" name="payment" value="A coordinar" checked> A coordinar</label><label class="radio-label"><input type="radio" name="payment" value="Transferencia"> Transferencia</label><label class="radio-label"><input type="radio" name="payment" value="Efectivo"> Efectivo</label></fieldset>
+      <div id="cart-totals" class="cart-totals"></div>
+      <button class="button button-dark checkout-button" type="submit">Confirmar pedido <span>↗</span></button>
+      <p class="checkout-note">No se realiza ningún cobro en línea. Coordinamos el pago y la entrega después de confirmar.</p>
+    </form>
+  </dialog>
+
+  <dialog id="settings-dialog" class="modal settings-modal">
+    <button class="modal-close" data-close="settings-dialog" aria-label="Cerrar">×</button>
+    <p class="eyebrow">CASA ÁMBAR</p><h2>Unas cosas <em>importantes.</em></h2>
+    <p>Envíos a todo el país. Los cambios se coordinan dentro de los 10 días de recibida la compra, con el producto cerrado y en su estado original.</p>
+    <button id="admin-entry" class="button button-outline">Acceso administrador</button>
+  </dialog>
+  <dialog id="login-dialog" class="modal small-modal">
+    <button class="modal-close" data-close="login-dialog" aria-label="Cerrar">×</button>
+    <p class="eyebrow">ÁREA PRIVADA</p><h2>Modo <em>administrador.</em></h2>
+    <form id="login-form"><label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label><p class="form-message" id="login-message"></p><button class="button button-dark" type="submit">Ingresar</button></form>
+  </dialog>
+
+  <dialog id="admin-dialog" class="modal admin-modal">
+    <div class="modal-heading"><div><p class="eyebrow">PANEL PRIVADO</p><h2>Tu tienda, <em>a tu manera.</em></h2></div><button class="modal-close" data-close="admin-dialog" aria-label="Cerrar">×</button></div>
+    <div class="admin-toolbar"><p>Productos, precios, inventario e identidad visual.</p><button id="logout-button" class="text-link">Cerrar sesión</button></div>
+    <section class="admin-section"><h3>Productos e inventario</h3><button id="new-product" class="button button-dark">＋ Nuevo producto</button><div id="admin-products" class="admin-list"></div></section>
+    <section class="admin-section"><h3>Categorías</h3><form id="category-form" class="inline-form"><input name="name" required placeholder="Nueva categoría"><button class="button button-outline">Crear</button></form><div id="admin-categories" class="admin-tags"></div></section>
+    <section class="admin-section"><h3>Promociones y cupones</h3><form id="promo-form" class="admin-form promo-form">
+      <input name="id" type="hidden">
+      <label>Nombre<input name="name" required placeholder="Descuento de temporada"></label><label>Código (opcional)<input name="code" placeholder="AROMA10"></label><label>Descuento %<input name="percent" type="number" min="1" max="90" value="10" required></label>
+      <label>Modalidad<select name="mode"><option value="all">Ambas</option><option value="retail">Minorista</option><option value="wholesale">Mayorista</option></select></label>
+      <label>Categoría<select name="category" id="promo-category"></select></label><label>Producto<select name="productId" id="promo-product"></select></label><label>Compra mínima<input name="minimum" type="number" min="0" value="0"></label>
+      <label class="check-label"><input name="active" type="checkbox" checked> Activa</label><button class="button button-outline">Crear promoción</button>
+    </form><div id="admin-promotions" class="admin-list"></div></section>
+    <section class="admin-section"><h3>Identidad de la tienda</h3><form id="settings-form" class="admin-form">
+      <label>Nombre<input name="name" maxlength="100"></label><label>Frase principal<input name="tagline" maxlength="120"></label><label>WhatsApp (código país + número)<input name="whatsapp" placeholder="54911..."></label>
+      <label>Color de acento<input name="accent" type="color"></label><label>Fondo<input name="background" type="color"></label><label>Texto<input name="ink" type="color"></label>
+      <label class="upload-label">Foto de perfil<input name="avatar" type="file" accept="image/jpeg,image/png,image/webp"></label><label class="check-label"><input name="removeAvatar" type="checkbox"> Quitar foto de perfil</label><button class="button button-dark">Guardar apariencia</button>
+    </form></section>
+    <form id="product-form" class="product-form" hidden>
+      <div class="modal-heading"><div><p class="eyebrow">CATÁLOGO</p><h2 id="product-form-title">Nuevo <em>producto.</em></h2></div><button class="modal-close" type="button" data-product-close aria-label="Cerrar">×</button></div>
+      <input name="id" type="hidden"><label>Nombre del producto<input name="name" required maxlength="100"></label>
+      <label>Categoría<select name="category" id="product-category"></select></label>
+      <label>Descripción<textarea name="description" rows="3" maxlength="600"></textarea></label><label>Notas olfativas<input name="notes" maxlength="160" placeholder="Rosa · ámbar · vainilla"></label>
+      <label class="upload-label">Agregar fotos (hasta 5 en total)<input name="images" type="file" accept="image/jpeg,image/png,image/webp" multiple></label><div id="editing-photos" class="editing-photos"></div>
+      <div class="price-fields"><fieldset><legend>Venta minorista</legend><label>Precio<input name="retailPrice" type="number" min="0"></label><label>Stock<input name="retailStock" type="number" min="0"></label></fieldset>
+      <fieldset><legend>Venta mayorista</legend><label>Precio<input name="wholesalePrice" type="number" min="0"></label><label>Stock<input name="wholesaleStock" type="number" min="0"></label><label>Mínimo de compra<input name="wholesaleMinimum" type="number" min="1" value="1"></label></fieldset></div>
+      <div class="form-actions"><button class="button button-outline" type="button" data-product-close>Cancelar</button><button class="button button-dark" type="submit">Guardar producto</button></div>
+    </form>
+  </dialog>
+  <dialog id="receipt-dialog" class="modal small-modal">
+    <button class="modal-close" data-close="receipt-dialog" aria-label="Cerrar">×</button>
+    <p class="eyebrow">PEDIDO RECIBIDO</p><h2>Gracias por <em>elegirnos.</em></h2>
+    <div id="receipt-summary"></div><a id="receipt-whatsapp" class="button button-dark" target="_blank" rel="noopener" hidden>Enviar pedido por WhatsApp ↗</a>
+    <p>Tu pedido quedó registrado. Coordinaremos los detalles de entrega y pago a la brevedad.</p>
+  </dialog>
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "casa-ambar-perfumeria",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tienda ligera con catálogo persistente en Supabase para venta minorista y mayorista de perfumería",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
