@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f3eb">
+  <meta name="theme-color" content="#f5f4f9">
   <meta name="description" content="Perfumería de autor. Tubitos árabes, extractos y body splash, con venta minorista y mayorista.">
   <title>bonav perfum — perfumería de autor</title>
   <link rel="stylesheet" href="style.css">
@@ -38,7 +38,7 @@
 
   <main>
     <section class="hero">
-      <div class="hero-copy">
+      <div class="hero-copy" data-reveal>
         <p class="eyebrow"><span class="eyebrow-line"></span> PERFUMERÍA PARA TODOS LOS DÍAS</p>
         <h1>Un aroma.<br><em>Una forma de estar.</em></h1>
         <p class="hero-description">Tubitos árabes, extractos y brumas elegidos para acompañar tu manera de sentir.</p>
@@ -48,7 +48,7 @@
         </div>
         <div class="hero-note"><span class="note-seal">CA</span><span>Pequeños rituales,<br>aromas que se quedan.</span></div>
       </div>
-      <div class="hero-still-life" aria-label="Composición ilustrada de perfumería">
+      <div class="hero-still-life" data-reveal data-reveal-delay="100" aria-label="Composición ilustrada de perfumería">
         <div class="still-life-caption">EL ARTE DE ELEGIR<br><span>UNA FRAGANCIA PROPIA</span></div>
         <div class="hero-sun"></div>
         <div class="hero-vase"></div>
@@ -58,13 +58,13 @@
       </div>
     </section>
 
-    <section class="category-section" aria-label="Explorar categorías">
+    <section class="category-section" data-reveal aria-label="Explorar categorías">
       <div class="section-kicker">ENCONTRÁ TU PRÓXIMO FAVORITO</div>
       <div id="category-links" class="category-links"></div>
     </section>
 
     <section class="catalog-section" id="catalog">
-      <div class="catalog-heading">
+      <div class="catalog-heading" data-reveal>
         <div>
           <p class="eyebrow"><span class="eyebrow-line"></span> NUESTRA SELECCIÓN</p>
           <h2 id="catalog-title">Perfumes para <em>hacerlos tuyos.</em></h2>
@@ -76,7 +76,7 @@
           </select>
         </label>
       </div>
-      <div class="catalog-controls">
+      <div class="catalog-controls" data-reveal data-reveal-delay="70">
         <div id="filter-chips" class="filter-chips" aria-label="Filtrar por categoría"></div>
         <div class="filter-options">
           <label class="filter-select"><span class="sr-only">Disponibilidad</span><select id="stock-filter"><option value="all">Todos los productos</option><option value="available">Con stock</option><option value="promos">En promoción</option></select></label>
@@ -87,19 +87,19 @@
       <button id="load-more" class="button button-outline load-more" hidden>Ver más fragancias</button>
     </section>
 
-    <section class="wholesale-banner">
+    <section class="wholesale-banner" data-reveal>
       <div class="wholesale-copy"><p class="eyebrow">PARA QUIENES EMPRENDEN</p><h2>Tu próximo best seller<br><em>puede empezar acá.</em></h2><p>Precios mayoristas claros, mínimos por producto y una selección que invita a volver.</p><button class="button button-light" data-mode="wholesale">Conocer venta mayorista <span aria-hidden="true">↗</span></button></div>
       <div class="wholesale-stamp"><span>BUENOS AROMAS<br>BUENOS NEGOCIOS</span><i>CA</i></div>
     </section>
 
     <section class="trust-section">
-      <div class="trust-intro"><p class="eyebrow"><span class="eyebrow-line"></span> COMPRAR CON CONFIANZA</p><h2>El gusto está<br>en los detalles.</h2></div>
-      <div class="trust-item"><span class="trust-number">01</span><h3>Selección cuidada</h3><p>Fragancias elegidas por su carácter, calidad y ese algo difícil de explicar.</p></div>
-      <div class="trust-item"><span class="trust-number">02</span><h3>Envíos a todo el país</h3><p>Coordinamos la entrega para que tu pedido llegue seguro y sin sorpresas.</p></div>
-      <div class="trust-item"><span class="trust-number">03</span><h3>Estamos cerca</h3><p>¿Tenés dudas? Te ayudamos a encontrar un aroma que se sienta tuyo.</p></div>
+      <div class="trust-intro" data-reveal><p class="eyebrow"><span class="eyebrow-line"></span> COMPRAR CON CONFIANZA</p><h2>El gusto está<br>en los detalles.</h2></div>
+      <div class="trust-item" data-reveal data-reveal-delay="70"><span class="trust-number">01</span><h3>Selección cuidada</h3><p>Fragancias elegidas por su carácter, calidad y ese algo difícil de explicar.</p></div>
+      <div class="trust-item" data-reveal data-reveal-delay="140"><span class="trust-number">02</span><h3>Envíos a todo el país</h3><p>Coordinamos la entrega para que tu pedido llegue seguro y sin sorpresas.</p></div>
+      <div class="trust-item" data-reveal data-reveal-delay="210"><span class="trust-number">03</span><h3>Estamos cerca</h3><p>¿Tenés dudas? Te ayudamos a encontrar un aroma que se sienta tuyo.</p></div>
     </section>
 
-    <section class="contact-strip">
+    <section class="contact-strip" data-reveal>
       <div><p class="eyebrow">¿HABLAMOS DE AROMAS?</p><h2>Estamos del otro lado.</h2></div>
       <a id="contact-link" class="contact-link" href="#">Escribinos <span>↗</span></a>
     </section>

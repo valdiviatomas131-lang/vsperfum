@@ -2,6 +2,28 @@
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+document.documentElement.classList.add('js');
+const revealObserver = !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window
+  ? new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-revealed');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: '0px 0px -36px 0px' })
+  : null;
+
+function observeReveals(root = document) {
+  const targets = $$('[data-reveal]:not(.is-revealed)', root);
+  if (!revealObserver) {
+    targets.forEach((target) => target.classList.add('is-revealed'));
+    return;
+  }
+  targets.forEach((target) => revealObserver.observe(target));
+}
+
+observeReveals();
+
 const state = {
   store: null,
   mode: 'retail',
@@ -142,6 +164,7 @@ function renderFilters() {
 function productCard(product) {
   const offer = product[state.mode];
   const card = el('article', `product-card ${offer.stock === 0 ? 'is-sold-out' : ''}`);
+  card.dataset.reveal = '';
   const imageButton = el('button', 'product-image-button');
   imageButton.type = 'button';
   imageButton.setAttribute('aria-label', `Ver detalles de ${product.name}`);
@@ -191,7 +214,12 @@ function renderProducts() {
     empty.append(el('span', 'empty-mark', '—'), el('h3', '', 'Todavía no encontramos ese aroma.'), el('p', '', 'Probá otra categoría o cambiá la búsqueda.'));
     grid.append(empty);
   } else {
-    products.slice(0, state.page * state.pageSize).forEach((product) => grid.append(productCard(product)));
+    products.slice(0, state.page * state.pageSize).forEach((product, index) => {
+      const card = productCard(product);
+      card.dataset.revealDelay = String((index % 4) * 55);
+      grid.append(card);
+    });
+    observeReveals(grid);
   }
   $('#load-more').hidden = products.length <= state.page * state.pageSize;
   $('#catalog-title').innerHTML = state.mode === 'wholesale'
@@ -589,13 +617,20 @@ async function loadStore() {
     throw error;
   }
   const settings = state.store.settings;
+  const themeColors = [
+    ['accent', '#a64f36', '#62599a', '--accent'],
+    ['background', '#f7f3eb', '#f5f4f9', '--paper'],
+    ['ink', '#29251f', '#1d1b32', '--ink'],
+  ];
+  themeColors.forEach(([key, legacyColor, newColor, property]) => {
+    if (typeof settings[key] !== 'string') return;
+    if (settings[key].toLowerCase() === legacyColor) settings[key] = newColor;
+    document.documentElement.style.setProperty(property, settings[key]);
+  });
   document.title = `${settings.name} — perfumería de autor`;
   $('#brand-name').textContent = settings.name;
   $('.hero-description').textContent = settings.tagline;
   $$('.footer-brand').forEach((node) => { node.firstChild.textContent = settings.name; });
-  document.documentElement.style.setProperty('--accent', settings.accent);
-  document.documentElement.style.setProperty('--paper', settings.background);
-  document.documentElement.style.setProperty('--ink', settings.ink);
   if (settings.avatar) {
     $('#brand-avatar').src = settings.avatar;
     $('#brand-avatar').hidden = false;
